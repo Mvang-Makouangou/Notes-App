@@ -8,6 +8,8 @@ const NoteForm = ({notes, setNotes}) => {
         description: ''
     });
 
+    const [isFormVisible, setIsFormVisible] = useState(false);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -37,7 +39,15 @@ const NoteForm = ({notes, setNotes}) => {
     }
 
     return(
-        <form onSubmit={handleSubmit} className="mb-6">
+        <>
+        {/* Toggle Button */}
+        <button onClick={() => setIsFormVisible(!isFormVisible)} 
+        className="w-full bg-gray-100 border border-gray-300 text-purple-800 py-2 rounded-lg cursor-pointer hover:bg-purple-200 hover:border-purple-300 transition mb-4">
+            {isFormVisible ? 'Hide Form ❌' : 'Add New Note ​➕'}
+        </button>
+
+        {/* Form */}
+        {isFormVisible && (<form onSubmit={handleSubmit} className="mb-6">
             <div className="mb-4">
                 <label htmlFor="title" className="block font-semibold">
                     Title
@@ -97,7 +107,8 @@ const NoteForm = ({notes, setNotes}) => {
             <button className="w-full bg-purple-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600">
                 Add Note
             </button>
-        </form>
+        </form>)}
+        </>
     )
 }
 
